@@ -13,6 +13,9 @@ app.add_middleware(
 )
 
 
+book = []
+
+
 class TaskSchema(BaseModel):
     id: str
     title: str
@@ -23,8 +26,18 @@ class TaskCreateSchema(BaseModel):
     title: str
 
 
+
+class Book(BaseModel):
+    title: str
+
+
 tasks: list[TaskSchema] = []
 
+
+
+@app.get("/book")
+def return_book(new_book: Book):
+    return {"message": f'Любимая книга: {new_book}'}
 
 
 @app.get("/tasks")
@@ -39,3 +52,15 @@ def create_task(payload: TaskCreateSchema) -> TaskSchema:
 
     tasks.append(new_task)
     return new_task
+
+
+
+
+
+@app.post("/book")
+def add_book(new_book: Book):
+    book.append(new_book)
+    return {"status": "ok"}
+
+
+
