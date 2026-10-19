@@ -5,6 +5,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY app ./app
+COPY app/main.py .
 
-CMD [ "uvicorn", "app.main:app" ]
+CMD ["uvicorn", "app.main:app"]
